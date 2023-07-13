@@ -1,6 +1,6 @@
 # Encoder for Tuning
 
-This is the repository that contains source code for the [E4T website](https://tuning-encoder.github.io).
+This is the repository that contains source code for the [DAT-Encoder website](https://tuning-encoder.github.io).
 It is based on the code from the [Nerfies website](https://nerfies.github.io). If you reuse this code, please credit them.
 
 
