@@ -92,7 +92,7 @@
   <div class="container is-max">
     <div class="container is-max-desktop is-centered has-text-centered">
       <h2 class="subtitle">
-        <b>TL;DR </b>  We prpose an encoder for multi-domain personalization. </h2><br>
+        <b>TL;DR </b>  We extend the domain-tuning encoder approach (E4T) to multiple-domains. </h2><br>
         <span class="tag is-medium is-rounded is-light is-success">
           <span class="icon"><i class="fas fa-fast-forward"></i></span>
           <span> Fast tuning</span>
@@ -170,7 +170,7 @@
         <div class="columns is-centered has-text-centered">
           <div class="column content has-text-justified is-four-fifths">
             <p>
-              We pre-train an encoder to predict <em>word-embeddings</em> and <em>Low-Rank Weght updates.</em>  
+              We pre-train an encoder to predict <em>word-embeddings</em> and <em>Low-Rank weight updates.</em>  
               Our method consists of a feature-extraction backbone which follows the E4T approach and uses a mix of
               CLIP-features from the concept image, and denoiser-based features from the current noisy generation. 
               These features are fed into an embedding prediction head, and a hypernetwork which predicts LoRA-style attention-weight offsets.
@@ -190,10 +190,11 @@
                   <div class="column is-1"></div>
                   <div class="column content is-centered has-text-justified">
                       <p>
-                        We employ a dual-path adaptation approach where each attention branch is repeated twice, 
+                        <b>Avoiding subject overfitting via dual-path adaptation: </b> We employ a dual-path adaptation approach where each attention branch is repeated twice, 
                         once using the soft-embedding and the hypernetwork offsets,
                         and once with the vanilla model and a hard-prompt containing the embedding's nearest neighbor. 
-                        These branches are linearly blended to better preserve the prior.
+                        These branches are linearly blended to better preserve the prior. 
+                        The latter path preserves the model's prior, while the new adapted branch adapts to the target concept.
                       </p>
                   </div>
                   <div class="column is-1"></div>
@@ -209,8 +210,9 @@
                   <div class="column is-1"></div>
                   <div class="column content is-centered has-text-justified">
                       <p>
-                        Our embeddings are regularized by using a nearest-neighbour based contrastive loss that pushes them towards real words,
-                        but away from the embeddings of other concepts.
+                        <b>Push predictions towards CLIP word embeddings for better editability:</b>
+                        Our embeddings are regularized using a nearest-neighbor-based contrastive loss that pushes them toward real words but away from the embeddings of other concepts. 
+                        Intuitively, staying close to the real-word embedding manifold ensures the target embedding will blend well in novel prompts, preserving the prompt semantic.
                       </p>
                   </div>
                   <div class="column is-1"></div>
